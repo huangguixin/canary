@@ -20,8 +20,8 @@ public class ChartServiceImpl implements ChartService {
     }
 
     @Override
-    public Chart save(Chart chart) {
-        return chartRepository.save(chart);
+    public List<Chart> save(List<Chart> charts) {
+        return chartRepository.saveAll(charts);
     }
 
     @Override

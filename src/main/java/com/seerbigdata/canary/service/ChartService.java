@@ -19,14 +19,15 @@ public interface ChartService {
      */
     List<Chart> findAll();
 
+
     /**
      * Save chart.
      *
-     * @param chart the chart
-     * @return the chart
-     * @author : huangguixin / 2019-01-19
+     * @param charts the charts
+     * @return the List<Chart>
+     * @author : huangguixin / 2019-01-22
      */
-    Chart save(Chart chart);
+    List<Chart> save(List<Chart> charts);
 
     /**
      * Find by id chart.

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
+ * UserController
+ *
  * @author :huangguixin / huangguixin@seerbigdata.com
  * @version : 1.0
  */

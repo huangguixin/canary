@@ -1,13 +1,15 @@
 package com.seerbigdata.canary.web;
 
 import com.seerbigdata.canary.entity.Chart;
-import com.seerbigdata.canary.entity.DataSource;
 import com.seerbigdata.canary.service.ChartService;
 import com.seerbigdata.canary.util.ResponseData;
+import com.seerbigdata.canary.validator.ChartValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 /**
  * ChartController
@@ -25,33 +27,37 @@ public class ChartController {
     @Autowired
     private ChartService chartService;
 
+
     /**
      * Add chart response data.
      *
-     * @param chart the chart
+     * @param charts the charts
      * @return the response data
-     * @author : huangguixin / 2019-01-19
+     * @author : huangguixin / 2019-01-22
      */
     @PostMapping("addChart")
-    public ResponseData addChart(@RequestBody Chart chart) {
-        Chart chart1 = chartService.save(chart);
-        return ResponseData.success(chart1.getId());
+    public ResponseData addChart(@RequestBody List<Chart> charts) {
+        if(!ChartValidator.validatorAddChart(charts)){
+            return ResponseData.error("图表数组不能为空");
+        }
+        charts = chartService.save(charts);
+        return ResponseData.success(charts.stream().map(Chart::getId).collect(Collectors.toList()));
     }
+
 
     /**
      * Update chart response data.
      *
-     * @param chart the chart
+     * @param charts the charts
      * @return the response data
-     * @author : huangguixin / 2019-01-19
+     * @author : huangguixin / 2019-01-22
      */
     @PutMapping("updateChart")
-    public ResponseData updateChart(@RequestBody Chart chart) {
-        try {
-            Chart chart1 = chartService.save(chart);
-        }catch (Exception e){
-            return ResponseData.error();
+    public ResponseData updateChart(@RequestBody List<Chart> charts) {
+        if(!ChartValidator.validatorUpdateChart(charts)){
+            return ResponseData.error("图表数组不能为空");
         }
+        chartService.save(charts);
         return ResponseData.success();
     }
 
@@ -64,11 +70,10 @@ public class ChartController {
      */
     @DeleteMapping("deleteChart")
     public ResponseData deleteChart(@RequestBody List<String> ids) {
-        try {
-            chartService.deleteAll(ids);
-        }catch (Exception e){
-            return ResponseData.error();
+        if(!ChartValidator.validatorDeleteChart(ids)){
+            return ResponseData.error("图表编号数组不能为空");
         }
+        chartService.deleteAll(ids);
         return ResponseData.success();
     }
 

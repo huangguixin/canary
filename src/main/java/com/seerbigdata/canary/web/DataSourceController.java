@@ -4,10 +4,12 @@ import com.seerbigdata.canary.dto.InitData;
 import com.seerbigdata.canary.entity.DataSource;
 import com.seerbigdata.canary.service.DataSourceService;
 import com.seerbigdata.canary.util.ResponseData;
+import com.seerbigdata.canary.validator.DataSourceValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author :huangguixin / huangguixin@seerbigdata.com
@@ -24,39 +26,18 @@ public class DataSourceController {
     private DataSourceService dataSourceService;
 
     /**
-     * Find all response data.
-     *
-     * @return the response data
-     * @author : huangguixin / 2019-01-19
-     */
-    @GetMapping("getDataSourceList")
-    public ResponseData findAll() {
-        List<DataSource> dataSources = dataSourceService.findAll();
-        return ResponseData.success(dataSources);
-    }
-
-    /**
-     * Add or update response data.
-     *
-     * @param dataSource the data source
-     * @return the response data
-     * @author : huangguixin / 2019-01-19
-     */
-    @PostMapping("postDataSource")
-    public ResponseData addOrUpdate(@RequestBody DataSource dataSource) {
-        return ResponseData.success(dataSourceService.save(dataSource));
-    }
-
-    /**
      * Add data source response data.
      *
      * @return the response data
      * @author : huangguixin / 2019-01-19
      */
     @PostMapping("addDataSource")
-    public ResponseData addDataSource(@RequestBody DataSource dataSource) {
-        DataSource dataSource1 = dataSourceService.save(dataSource);
-        return ResponseData.success(dataSource1.getId());
+    public ResponseData addDataSource(@RequestBody List<DataSource> dataSources) {
+        if(!DataSourceValidator.validatorAddDataSource(dataSources)){
+            return ResponseData.error("dataSources 不能为空");
+        }
+        dataSources = dataSourceService.save(dataSources);
+        return ResponseData.success(dataSources.stream().map(DataSource::getId).collect(Collectors.toList()));
     }
 
     /**
@@ -67,12 +48,10 @@ public class DataSourceController {
      */
     @DeleteMapping("deleteDataSource")
     public ResponseData deleteDataSource(@RequestBody List<String> ids) {
-
-        try {
-            dataSourceService.deleteAll(ids);
-        }catch (Exception e){
-            return ResponseData.error();
+        if(!DataSourceValidator.validatorDeleteDataSource(ids)){
+            return ResponseData.error("ids 不能为空");
         }
+        dataSourceService.deleteAll(ids);
         return ResponseData.success();
     }
 
@@ -83,12 +62,11 @@ public class DataSourceController {
      * @author : huangguixin / 2019-01-19
      */
     @PutMapping("updateDataSource")
-    public ResponseData updateDataSource(@RequestBody DataSource dataSource) {
-        try {
-            dataSourceService.save(dataSource);
-        }catch (Exception e){
-            return ResponseData.error();
+    public ResponseData updateDataSource(@RequestBody List<DataSource> dataSources) {
+        if(!DataSourceValidator.validatorUpdateDataSource(dataSources)){
+            return ResponseData.error("dataSources 不能为空");
         }
+        dataSourceService.save(dataSources);
         return ResponseData.success();
     }
 

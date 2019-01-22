@@ -22,14 +22,15 @@ public interface DataSourceService {
      */
     List<DataSource> findAll();
 
+
     /**
-     * Save data source.
+     * Save list.
      *
-     * @param dataSource the data source
-     * @return the data source
-     * @author : huangguixin / 2019-01-19
+     * @param dataSources the data sources
+     * @return the list
+     * @author : huangguixin / 2019-01-22
      */
-    DataSource save(DataSource dataSource);
+    List<DataSource> save(List<DataSource> dataSources);
 
     /**
      * Find by id data source.

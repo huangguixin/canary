@@ -20,14 +20,15 @@ public interface ForeignDBService {
      */
     List<ForeignDB> findAll();
 
+
     /**
-     * Save foreign db.
+     * Save list.
      *
-     * @param foreignDB the foreign db
-     * @return the foreign db
-     * @author : huangguixin / 2019-01-19
+     * @param foreignDBS the foreign dbs
+     * @return the list
+     * @author : huangguixin / 2019-01-22
      */
-    ForeignDB save(ForeignDB foreignDB);
+    List<ForeignDB> save(List<ForeignDB> foreignDBS);
 
     /**
      * Find by id foreign db.

@@ -20,14 +20,15 @@ public interface DashBoardService {
      */
     List<DashBoard> findAll();
 
+
     /**
-     * Save dash board.
+     * Save list.
      *
-     * @param dashBoard the dash board
-     * @return the dash board
-     * @author : huangguixin / 2019-01-19
+     * @param dashBoards the dash boards
+     * @return the list
+     * @author : huangguixin / 2019-01-22
      */
-    DashBoard save(DashBoard dashBoard);
+    List<DashBoard> save(List<DashBoard> dashBoards);
 
     /**
      * Find by id dash board.

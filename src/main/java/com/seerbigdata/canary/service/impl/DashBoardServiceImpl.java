@@ -34,16 +34,17 @@ public class DashBoardServiceImpl implements DashBoardService {
         return dashBoardRepository.findAll();
     }
 
+
     /**
-     * Save dash board.
+     * Save list.
      *
-     * @param dashBoard the dash board
-     * @return the dash board
-     * @author : huangguixin / 2019-01-19
+     * @param dashBoards the dash boards
+     * @return the list
+     * @author : huangguixin / 2019-01-22
      */
     @Override
-    public DashBoard save(DashBoard dashBoard) {
-        return dashBoardRepository.save(dashBoard);
+    public List<DashBoard> save(List<DashBoard> dashBoards) {
+        return dashBoardRepository.saveAll(dashBoards);
     }
 
     /**

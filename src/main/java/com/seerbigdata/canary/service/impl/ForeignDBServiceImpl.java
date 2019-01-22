@@ -9,7 +9,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-/**ForeignDBServiceImpl
+/**
+ * ForeignDBServiceImpl
  *
  * @author :huangguixin / huangguixin@seerbigdata.com
  * @version : 1.0
@@ -17,19 +18,42 @@ import java.util.Optional;
 @Service
 public class ForeignDBServiceImpl implements ForeignDBService {
 
+    /**
+     * Foreign db repository
+     */
     @Autowired
     private ForeignDBRepository foreignDBRepository;
 
+    /**
+     * Find all list.
+     *
+     * @return the list
+     * @author : huangguixin / 2019-01-22
+     */
     @Override
     public List<ForeignDB> findAll(){
        return foreignDBRepository.findAll();
     }
 
+    /**
+     * Save list.
+     *
+     * @param foreignDBS the foreign dbs
+     * @return the list
+     * @author : huangguixin / 2019-01-22
+     */
     @Override
-    public ForeignDB save(ForeignDB foreignDB){
-         return foreignDBRepository.save(foreignDB);
+    public List<ForeignDB> save(List<ForeignDB> foreignDBS) {
+        return foreignDBRepository.saveAll(foreignDBS);
     }
 
+    /**
+     * Find by id foreign db.
+     *
+     * @param id the id
+     * @return the foreign db
+     * @author : huangguixin / 2019-01-22
+     */
     @Override
     public ForeignDB findById(String id){
         Optional<ForeignDB> foreignDB = foreignDBRepository.findById(id);

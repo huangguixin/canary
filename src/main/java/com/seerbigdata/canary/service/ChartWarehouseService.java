@@ -20,14 +20,15 @@ public interface ChartWarehouseService {
      */
     List<ChartWarehouse> findAll();
 
+
     /**
-     * Save chart warehouse.
+     * Save list.
      *
-     * @param chartWarehouse the chart warehouse
-     * @return the chart warehouse
-     * @author : huangguixin / 2019-01-19
+     * @param chartWarehouses the chart warehouses
+     * @return the list
+     * @author : huangguixin / 2019-01-22
      */
-    ChartWarehouse save(ChartWarehouse chartWarehouse);
+    List<ChartWarehouse> save(List<ChartWarehouse> chartWarehouses);
 
     /**
      * Find by id chart warehouse.

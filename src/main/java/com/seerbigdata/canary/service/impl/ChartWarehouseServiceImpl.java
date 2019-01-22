@@ -35,15 +35,15 @@ public class ChartWarehouseServiceImpl implements ChartWarehouseService {
     }
 
     /**
-     * Save chart warehouse.
+     * Save list.
      *
-     * @param chartWarehouse the chart warehouse
-     * @return the chart warehouse
-     * @author : huangguixin / 2019-01-19
+     * @param chartWarehouses the chart warehouses
+     * @return the list
+     * @author : huangguixin / 2019-01-22
      */
     @Override
-    public ChartWarehouse save(ChartWarehouse chartWarehouse) {
-        return chartWarehouseRepository.save(chartWarehouse);
+    public List<ChartWarehouse> save(List<ChartWarehouse> chartWarehouses) {
+        return chartWarehouseRepository.saveAll(chartWarehouses);
     }
 
     /**
